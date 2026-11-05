@@ -1,14 +1,14 @@
 {
-  "lastSuccessfulRun": "2026-11-05T20:10:02.914Z",
-  "lastRun": "2026-11-05T20:10:02.914Z",
+  "lastSuccessfulRun": "2026-11-05T20:29:30.077Z",
+  "lastRun": "2026-11-05T20:29:30.077Z",
   "sources": [
     {
       "sourceId": "burgerweeshuis",
       "sourceName": "Burgerweeshuis",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-05T19:53:57.441Z",
-      "lastSuccess": "2026-11-05T19:53:57.441Z",
+      "lastAttempt": "2026-11-05T20:13:29.422Z",
+      "lastSuccess": "2026-11-05T20:13:29.422Z",
       "fetched": 37,
       "notes": "37 detailpagina's"
     },
@@ -17,8 +17,8 @@
       "sourceName": "Deventer.info (VVV Deventer)",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-05T19:53:57.441Z",
-      "lastSuccess": "2026-11-05T19:53:57.441Z",
+      "lastAttempt": "2026-11-05T20:13:29.422Z",
+      "lastSuccess": "2026-11-05T20:13:29.422Z",
       "fetched": 1293,
       "notes": "1293 activiteit-dagen over 107 dagen; 729 met soort (1 detailpagina's opgehaald, 1 mislukt)"
     },
@@ -27,8 +27,8 @@
       "sourceName": "Alternatief verzameld",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-05T19:53:57.441Z",
-      "lastSuccess": "2026-11-05T19:53:57.441Z",
+      "lastAttempt": "2026-11-05T20:13:29.422Z",
+      "lastSuccess": "2026-11-05T20:13:29.422Z",
       "fetched": 4
     },
     {
@@ -36,8 +36,8 @@
       "sourceName": "MIMIK",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-05T19:53:57.441Z",
-      "lastSuccess": "2026-11-05T19:53:57.441Z",
+      "lastAttempt": "2026-11-05T20:13:29.422Z",
+      "lastSuccess": "2026-11-05T20:13:29.422Z",
       "fetched": 121,
       "notes": "182 pagina's opgehaald, 0 uit de cache overgeslagen"
     },
@@ -53,8 +53,8 @@
       "sourceName": "Vaste plekken",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-05T19:53:57.441Z",
-      "lastSuccess": "2026-11-05T19:53:57.441Z",
+      "lastAttempt": "2026-11-05T20:13:29.422Z",
+      "lastSuccess": "2026-11-05T20:13:29.422Z",
       "fetched": 9,
       "notes": "9 vaste plekken"
     }
@@ -62,7 +62,7 @@
   "totals": {
     "active": 1404,
     "added": 0,
-    "updated": 134,
+    "updated": 2,
     "cancelled": 0,
     "expired": 0,
     "merged": 66
