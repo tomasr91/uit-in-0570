@@ -9,8 +9,9 @@
  *    het soort (h2.genre: Film, Theater, …) en de Kijkwijzer-plaatjes.
  *  - De sitemap bevat ook voorbij programma. Pagina's waarvan alle voorstellingen voorbij zijn, halen we
  *    niet opnieuw op (detailcache); pagina's zonder speeltijden hooguit eens per week.
- *  - Films: één item per film met de periode waarin hij draait (zoals bij Pathé); theater en Junior:
- *    één item per voorstelling.
+ *  - Films (pagina's met ScreeningEvent, ook ballet/opera-vertoningen en filmreeksen): één item per titel
+ *    met de periode waarin hij draait (zoals bij Pathé); theater: één item per voorstelling.
+ *  - Junior: soort "Junior" of een leeftijd in de titel ("Dikkie Dik (3+)"); die leeftijd gaat uit de titel.
  *  - Omschrijvingen worden niet overgenomen.
  */
 import * as cheerio from 'cheerio';
@@ -36,6 +37,10 @@ export interface MimikPage {
   title: string;
   genre?: string;
   kijkwijzer?: string;
+  /** Leeftijd uit de titel, bv. "Dikkie Dik (3+)". */
+  minAge?: number;
+  /** Pagina met schema.org ScreeningEvent: een film (ook ballet/opera-vertoningen en filmreeksen). */
+  screening: boolean;
   durationMinutes?: number;
   shows: MimikShow[];
 }
@@ -57,8 +62,11 @@ function ratingRef(img: string | undefined): string | undefined {
 export function parseMimikPage(html: string, url: string): MimikPage | undefined {
   const $ = cheerio.load(html);
   const ld = extractJsonLdEvents(html).filter((o) => typeof o.startDate === 'string' && typeof o.name === 'string');
-  const title = cleanText(String(ld[0]?.name ?? $('h1.title').first().text()));
-  if (!title) return undefined;
+  // JSON-LD bevat HTML-codes ("(3&#x2B;)"): via cheerio decoderen.
+  const rawTitle = cleanText(cheerio.load(`<p>${String(ld[0]?.name ?? $('h1.title').first().html() ?? '')}</p>`).text());
+  if (!rawTitle) return undefined;
+  const ageMatch = rawTitle.match(/\s*\((\d{1,2})\+\)\s*$/);
+  const title = ageMatch ? rawTitle.slice(0, ageMatch.index).trim() : rawTitle;
   // Speeltijden in de lijst: "za 07-11" + "18:30" → zaal, prijs, knop.
   const rows = new Map<string, Omit<MimikShow, 'start'>>();
   $('.date').each((_, el) => {
@@ -93,22 +101,27 @@ export function parseMimikPage(html: string, url: string): MimikPage | undefined
     title,
     genre: cleanText($('h2.genre').first().text()) || undefined,
     kijkwijzer: kw,
+    minAge: ageMatch ? Number(ageMatch[1]) : undefined,
+    screening: ld.some((o) => o['@type'] === 'ScreeningEvent'),
     durationMinutes: duur ? Number(duur[1]) : undefined,
     shows,
   };
 }
 
-const JUNIOR = /\b(junior|kinder\w*|kids?|famil\w*|jeugd\w*|peuter\w*|kleuter\w*)\b/i;
+const JUNIOR = /\bjunior\b/i;
 const venue = (room?: string) => ({ venueName: room ? `MIMIK, ${room}` : 'MIMIK', address: ADDRESS, locality: 'Binnenstad' });
 
 export function mimikToRaw(p: MimikPage, today: string, until: string, nowIso: string): RawEvent[] {
   const shows = p.shows.filter((s) => s.start.slice(0, 10) >= today && s.start.slice(0, 10) <= until);
   if (!shows.length) return [];
-  const isFilm = /film/i.test(p.genre ?? '') || (!p.genre && p.kijkwijzer !== undefined);
-  const junior = JUNIOR.test(`${p.genre ?? ''} ${p.title}`);
+  const isFilm = p.screening || /film/i.test(p.genre ?? '');
+  // Junior: het soort op de pagina is "Junior", of de titel heeft een leeftijd ("(3+)").
+  const junior = JUNIOR.test(p.genre ?? '') || p.minAge !== undefined;
   const slug = p.url.split('/').pop()!;
   const ageFields: Partial<RawEvent> =
-    junior && p.kijkwijzer
+    junior && p.minAge !== undefined
+      ? { ageLabel: `${p.minAge}+`, officialMinMonths: p.minAge * 12 }
+      : junior && p.kijkwijzer
       ? {
           ageLabel: p.kijkwijzer === 'al' ? 'Alle leeftijden' : `Kijkwijzer ${p.kijkwijzer.replace(/\D/g, '')} (jonger met begeleiding)`,
           estimatedMinMonths: estimatedMinFromRating(p.kijkwijzer),
@@ -179,6 +192,7 @@ export const mimik: SourceAdapter = {
     const weekAgo = new Date(Date.parse(ctx.nowIso) - 7 * 86400000).toISOString();
     let fetched = 0;
     let skipped = 0;
+    let complete = true;
     for (const url of urls) {
       const hit = ctx.cache?.get<Cached>(url);
       // Alles voorbij: niet opnieuw ophalen. Zonder speeltijden: eens per week.
@@ -190,7 +204,10 @@ export const mimik: SourceAdapter = {
         skipped++;
         continue;
       }
-      if (fetched >= ctx.maxDetailPages) break;
+      if (fetched >= ctx.maxDetailPages) {
+        complete = false;
+        break;
+      }
       fetched++;
       try {
         const page = parseMimikPage(await fetchText(url), url);
@@ -200,6 +217,12 @@ export const mimik: SourceAdapter = {
         ctx.log(`  fout bij ${url}: ${(e as Error).message}`);
       }
     }
-    return { events, notes: `${fetched} pagina's opgehaald, ${skipped} uit de cache overgeslagen` };
+    // Overgeslagen pagina's hebben geen voorstellingen in het venster, dus bij een volledige ronde is de
+    // lijst compleet en mogen verdwenen voorstellingen weg.
+    return {
+      events,
+      coverage: complete ? { from: ctx.today, to: ctx.until } : undefined,
+      notes: `${fetched} pagina's opgehaald, ${skipped} uit de cache overgeslagen`,
+    };
   },
 };

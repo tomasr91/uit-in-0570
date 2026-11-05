@@ -51,7 +51,7 @@ describe('MIMIK', () => {
   const page = parseMimikPage(fx('mimik-film.html'), 'https://www.mimik.nl/agenda/wen-er-maar-aan')!;
 
   it('leest speeltijden uit JSON-LD en koppelt zaal en prijs', () => {
-    expect(page).toMatchObject({ title: 'Wen Er Maar Aan', genre: 'Film', kijkwijzer: '-6ans', durationMinutes: 104 });
+    expect(page).toMatchObject({ title: 'Wen Er Maar Aan', genre: 'Film', kijkwijzer: '-6ans', durationMinutes: 104, screening: true });
     expect(page.shows).toHaveLength(4);
     expect(page.shows[0]).toEqual({ start: '2026-11-07T18:30', room: 'Filmzaal 1', price: '€ 13,00', soldOut: false });
   });
@@ -65,9 +65,21 @@ describe('MIMIK', () => {
   });
 
   it('theater en Junior: één item per voorstelling; Junior is voor kinderen', () => {
-    const theater = { ...page, genre: 'Junior', title: 'Voorstelling', kijkwijzer: undefined };
+    const theater = { ...page, genre: 'Junior', title: 'Voorstelling', kijkwijzer: undefined, screening: false };
     const evs = mimikToRaw(theater, TODAY, UNTIL, 'nu');
     expect(evs).toHaveLength(4);
     expect(evs[0]).toMatchObject({ start: '2026-11-07T18:30', audiences: ['kinderen', 'gezin'], kind: 'Jeugdtheater' });
+  });
+
+  it('een leeftijd in de titel maakt een kinderfilm en wordt uit de titel gehaald', () => {
+    const html = fx('mimik-film.html').replaceAll('"name": "Wen Er Maar Aan"', '"name": "Dikkie Dik en de verdwenen knuffel (3&#x2B;)"');
+    const kids = parseMimikPage(html, 'https://www.mimik.nl/agenda/dikkie-dik')!;
+    expect(kids).toMatchObject({ title: 'Dikkie Dik en de verdwenen knuffel', minAge: 3 });
+    expect(mimikToRaw(kids, TODAY, UNTIL, 'nu')[0]).toMatchObject({ kind: 'Kinderfilm', audiences: ['kinderen', 'gezin'], officialMinMonths: 36, ageLabel: '3+' });
+  });
+
+  it('"Club Kid" is geen kinderfilm', () => {
+    const html = fx('mimik-film.html').replaceAll('"name": "Wen Er Maar Aan"', '"name": "Club Kid"');
+    expect(mimikToRaw(parseMimikPage(html, 'https://www.mimik.nl/agenda/club-kid')!, TODAY, UNTIL, 'nu')[0].audiences).toEqual(['volwassenen']);
   });
 });
