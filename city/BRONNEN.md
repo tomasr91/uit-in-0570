@@ -21,4 +21,6 @@ Deze bronnen hebben een eigen adapter in `city/adapters/` nodig. De websites zij
 | Speelgoedmuseum Deventer | hetspeelgoedmuseum.nl | Terugkerende gezinsactiviteiten (spelletjesmiddag, knutselmiddag) |
 | Dickens Festijn | dickensfestijn.nl | Datum en tijden in december |
 
+Eerste diagnose (5-11-2026, vanuit GitHub Actions): de Deventer Schouwburg geeft 403 (Cloudflare-controle, ook voor robots.txt); MIMIK (`/agenda/`), Burgerweeshuis (`/programma`), Speelgoedmuseum (`/agenda/activiteitenkalender/`, WordPress) en Dickens Festijn (`/programma-dickensfestijn/`) zijn bereikbaar. Geen van de vijf heeft een iCal-feed of een The Events Calendar-API op de homepage; volgende stap is een diagnose met `bewaar` van die agendapagina's.
+
 Overwogen, voorlopig niet: **Pathé** (geen vestiging in Deventer), **Vue Deventer** (motor heeft alleen een Pathé-adapter), **Bibliotheek Deventer** (website nog niet vastgesteld).
