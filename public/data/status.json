@@ -1,8 +1,37 @@
 {
-  "sources": [],
+  "lastSuccessfulRun": "2026-11-05T18:33:01.366Z",
+  "lastRun": "2026-11-05T18:33:01.366Z",
+  "sources": [
+    {
+      "sourceId": "handmatig",
+      "sourceName": "Alternatief verzameld",
+      "enabled": true,
+      "ok": true,
+      "lastAttempt": "2026-11-05T18:32:57.356Z",
+      "lastSuccess": "2026-11-05T18:32:57.356Z",
+      "fetched": 4
+    },
+    {
+      "sourceId": "pathe",
+      "sourceName": "Pathé",
+      "enabled": false,
+      "ok": false,
+      "fetched": 0
+    },
+    {
+      "sourceId": "vaste-plekken",
+      "sourceName": "Vaste plekken",
+      "enabled": true,
+      "ok": true,
+      "lastAttempt": "2026-11-05T18:32:57.356Z",
+      "lastSuccess": "2026-11-05T18:32:57.356Z",
+      "fetched": 9,
+      "notes": "9 vaste plekken"
+    }
+  ],
   "totals": {
-    "active": 0,
-    "added": 0,
+    "active": 13,
+    "added": 13,
     "updated": 0,
     "cancelled": 0,
     "expired": 0,
