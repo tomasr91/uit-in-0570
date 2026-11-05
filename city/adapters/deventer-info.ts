@@ -89,17 +89,38 @@ export function parseDiList(html: string): { cards: DiCard[]; hasNext: boolean }
   return { cards, hasNext: $('.pagination a[rel="next"]').length > 0 };
 }
 
-/** "Deventer Schouwburg, Leeuwenbrug 2" → plek en adres; links en losse straatnamen zonder komma netjes. */
-export function splitPlace(place: string | undefined): Pick<RawEvent, 'venueName' | 'address'> {
-  if (!place) return {};
-  const p = cleanText(place.replace(/https?:\/\/\S+/g, ''));
-  if (!p) return {};
+const GLUE = /[a-z0-9@)](?=[A-Z][a-z])/g;
+const STREETISH = /\d|(straat|weg|laan|plein|kade|markt|singel|steeg|dijk|gracht|hof|pad|park|brink|wal|poort|baan|veld|erf|ring)\b/i;
+
+/** Splits "PlekStraat 1": de laatste rest zonder nieuwe plakplek die op een adres lijkt. */
+function unglue(p: string): string {
+  for (const m of p.matchAll(GLUE)) {
+    const rest = p.slice(m.index + 1);
+    if (!rest.match(GLUE) && STREETISH.test(rest)) return `${p.slice(0, m.index + 1)}, ${rest}`;
+  }
+  return p;
+}
+
+/** Plaatsen in de regio die deventer.info ook noemt; dan hoort het adres niet bij Deventer. */
+const NEARBY = ['Gorssel', 'Twello', 'Olst', 'Wijhe', 'Zutphen', 'Apeldoorn', 'Raalte', 'Holten', 'Wilp', 'Epse', 'Lochem', 'Terwolde', 'Voorst', 'Bussloo'];
+
+/**
+ * "Deventer Schouwburg, Leeuwenbrug 2" → plek en adres. De bron plakt plek en straat soms zonder komma
+ * aan elkaar ("KikajonNieuwstraat 60", "PS48Polstraat 48"): dan splitsen we op de eerste overgang naar een
+ * hoofdletter direct na een kleine letter of cijfer. Links worden weggelaten.
+ */
+export function splitPlace(place: string | undefined): Pick<RawEvent, 'venueName' | 'address' | 'locality'> {
+  if (!place) return { locality: 'Deventer' };
+  let p = cleanText(place.replace(/https?:\/\/\S+/g, ''));
+  if (!p) return { locality: 'Deventer' };
+  if (!p.includes(',')) p = unglue(p);
   const i = p.lastIndexOf(',');
-  if (i < 0) return { venueName: p };
-  const venueName = cleanText(p.slice(0, i));
-  const street = cleanText(p.slice(i + 1));
-  const looksLikeStreet = /[a-z]{3,}.*\d/i.test(street) && !/\d{4}\s?[a-z]{2}/i.test(street);
-  return { venueName: venueName || undefined, address: looksLikeStreet ? `${street}, Deventer` : street || undefined };
+  const venueName = i < 0 ? p : cleanText(p.slice(0, i)) || undefined;
+  const street = i < 0 ? '' : cleanText(p.slice(i + 1));
+  const town = NEARBY.find((t) => new RegExp(`\\b${t}\\b`, 'i').test(p));
+  const locality = town ?? 'Deventer';
+  if (!street) return { venueName, locality };
+  return { venueName, address: `${street}, ${locality}`, locality };
 }
 
 function priceOf(price: string | undefined): string | undefined {

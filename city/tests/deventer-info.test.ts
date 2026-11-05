@@ -20,7 +20,7 @@ describe('deventer.info', () => {
     const ev = diToRaw(cards[0], DAY, true, 'nu')!;
     expect(ev).toMatchObject({
       sourceEventId: 'di-182773-2026-11-07', seriesKey: 'di-182773', start: '2026-11-07T10:00', end: '2026-11-07T12:00',
-      venueName: 'Etty Hillesum Centrum', address: 'Roggestraat 3, Deventer', priceText: '€ 25,00', hints: ['Kinderen'],
+      venueName: 'Etty Hillesum Centrum', address: 'Roggestraat 3, Deventer', locality: 'Deventer', priceText: '€ 25,00', hints: ['Kinderen'],
     });
     expect(ev.summary).toBeUndefined();
     expect(diToRaw(cards[0], '2026-11-08', false, 'nu')).toBeUndefined();
@@ -34,8 +34,15 @@ describe('deventer.info', () => {
   });
 
   it('adres zonder komma of met een link', () => {
-    expect(splitPlace('Startpunt Nijendalhttps://maps.app.goo.gl/x')).toEqual({ venueName: 'Startpunt Nijendal' });
-    expect(splitPlace('PS48 AteliersPolstraat 48')).toEqual({ venueName: 'PS48 AteliersPolstraat 48' });
+    expect(splitPlace('Startpunt Nijendalhttps://maps.app.goo.gl/x')).toEqual({ venueName: 'Startpunt Nijendal', locality: 'Deventer' });
+    expect(splitPlace('KikajonNieuwstraat 60')).toEqual({ venueName: 'Kikajon', address: 'Nieuwstraat 60, Deventer', locality: 'Deventer' });
+    expect(splitPlace('PS48Polstraat 48')).toMatchObject({ venueName: 'PS48', address: 'Polstraat 48, Deventer' });
+    expect(splitPlace('Clubgebouw Wijk 16Zutphenselaan 18')).toMatchObject({ venueName: 'Clubgebouw Wijk 16', address: 'Zutphenselaan 18, Deventer' });
+    expect(splitPlace('Werkplaats 31@Randerstraat 31')).toMatchObject({ venueName: 'Werkplaats 31@', address: 'Randerstraat 31, Deventer' });
+    expect(splitPlace('Tramstation GorsselVan de Capellenlaan 4')).toEqual({ venueName: 'Tramstation Gorssel', address: 'Van de Capellenlaan 4, Gorssel', locality: 'Gorssel' });
+    expect(splitPlace('FietStoer DeventerKorte Ennestraat')).toMatchObject({ venueName: 'FietStoer Deventer', address: 'Korte Ennestraat, Deventer' });
+    expect(splitPlace('Deventer Schouwburg, Leeuwenbrug 2')).toMatchObject({ venueName: 'Deventer Schouwburg', address: 'Leeuwenbrug 2, Deventer' });
+    expect(splitPlace(undefined)).toEqual({ locality: 'Deventer' });
   });
 
   it('detailtekst alleen voor de indeling, niet als samenvatting', () => {
