@@ -1,7 +1,7 @@
 /**
  * Bekende locaties van Deventer (stadsprofiel), met wijk/plaats en adres.
  * Coördinaten zijn weggelaten: de update zoekt het adres op via PDOK.
- * Adressen gecontroleerd op 5-11-2026 (eigen sites, Kidsproof, Go-kids).
+ * Adressen gecontroleerd op 5-11-2026 (eigen sites, Kidsproof, Go-kids, deventer.info).
  */
 import type { KnownVenue } from '../collector/venues.ts';
 
@@ -16,4 +16,10 @@ export const CITY_VENUES: KnownVenue[] = [
   { name: 'Vue Deventer', aliases: /vue( bioscoop)? deventer|^vue$/i, locality: 'Deventer', address: 'Boreelplein 36, 7411 EH Deventer', indoor: 'binnen' },
   { name: 'De Scheg', aliases: /de scheg/i, locality: 'Deventer', address: 'Piet van Donkplein 1, 7422 LW Deventer', indoor: 'binnen' },
   { name: 'Kinderboerderij De Ulebelt', aliases: /ulebelt/i, locality: 'Deventer', address: 'Maatmansweg 3, Deventer', indoor: 'beide' },
+  { name: 'Museum EICAS', aliases: /eicas/i, locality: 'Binnenstad', address: 'Nieuwe Markt 23, Deventer', indoor: 'binnen' },
+  { name: 'Etty Hillesum Centrum', aliases: /etty hillesum/i, locality: 'Binnenstad', address: 'Roggestraat 3, Deventer', indoor: 'binnen' },
+  { name: 'Broederenkerk', aliases: /broederenkerk/i, locality: 'Binnenstad', address: 'Broederenstraat 18, Deventer', indoor: 'binnen' },
+  { name: 'Penninckshuis', aliases: /penninckshuis/i, locality: 'Binnenstad', address: 'Brink 89, 7411 BX Deventer', indoor: 'binnen' },
+  { name: 'Geert Groote Huis', aliases: /geert groote huis/i, locality: 'Binnenstad', address: 'Lamme van Dieseplein 4, Deventer', indoor: 'binnen' },
+  { name: 'MIMIK', aliases: /^mimik\b/i, locality: 'Binnenstad', address: 'Achter de Muren Vispoort 8-10, 7411 SL Deventer', indoor: 'binnen' },
 ];

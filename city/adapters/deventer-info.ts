@@ -117,10 +117,11 @@ export function splitPlace(place: string | undefined): Pick<RawEvent, 'venueName
   const i = p.lastIndexOf(',');
   const venueName = i < 0 ? p : cleanText(p.slice(0, i)) || undefined;
   const street = i < 0 ? '' : cleanText(p.slice(i + 1));
+  // Plaats alleen invullen voor de regio; in Deventer zelf bepalen bekende locaties (venues.ts) en het
+  // adres de wijk (een ingevulde plaats "Deventer" zou de binnenstad overschrijven).
   const town = NEARBY.find((t) => new RegExp(`\\b${t}\\b`, 'i').test(p));
-  const locality = town ?? 'Deventer';
-  if (!street) return { venueName, locality };
-  return { venueName, address: `${street}, ${locality}`, locality };
+  if (!street) return town ? { venueName, locality: town } : { venueName };
+  return town ? { venueName, address: `${street}, ${town}`, locality: town } : { venueName, address: `${street}, Deventer` };
 }
 
 function priceOf(price: string | undefined): string | undefined {
