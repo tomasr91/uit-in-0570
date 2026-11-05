@@ -7,6 +7,7 @@ Per bron: wat er wordt opgehaald, hoe, en wat de beperkingen zijn. Alle bronnen 
 | Bron | Adapter | Methode | Dekking | Beperkingen |
 |---|---|---|---|---|
 | Handmatig | `handmatig` | JSON in `data/curated/` | Startdataset (Sinterklaasintochten, Dickens Festijn) en wat de nachtelijke update niet zelf kan ophalen | Wekelijks bijgehouden door de skill `bronnen-verversen` |
+| Deventer.info (VVV Deventer) | `deventer-info` | Dagpagina's `/agenda/DD-MM-JJJJ/` (24 per pagina, `?p=N`), kinderlijst en categorielijsten | De stadsagenda: musea, rondleidingen, markten, workshops, ook de voorstellingen van de Deventer Schouwburg | Kaarttekst en omschrijving worden niet getoond (alleen voor de indeling); veel verzoeken per run (± 120 dagen × 2 lijsten + 14 dagen × 13 categorieën) |
 | MIMIK | `mimik` | Sitemap + pagina per titel (schema.org ScreeningEvent) | Films (één item per film over de speelperiode), theater en Junior per voorstelling, met zaal en prijs | `/mvc/` (de agendalijst) is verboden in robots.txt; pagina's die helemaal voorbij zijn worden niet opnieuw opgehaald. Eerste run ± 185 pagina's |
 | Burgerweeshuis | `burgerweeshuis` | `/programma` + pagina per voorstelling (schema.org Event en vakjes) | Concerten, clubavonden, talentavonden; aanvangstijd, eindtijd, prijs, status (uitverkocht/geannuleerd) | ± 55 detailpagina's per run |
 | Vaste plekken | `vaste-plekken` | `data/places.json` | Musea, kinderboerderijen, speeltuinen, bibliotheek, zwembad | Maandelijks gecontroleerd; openingstijden alleen waar bevestigd |
@@ -17,7 +18,7 @@ Deze bronnen hebben een eigen adapter in `city/adapters/` nodig. De websites zij
 
 | Bron | Website | Waarom |
 |---|---|---|
-| Deventer Schouwburg | deventerschouwburg.nl | Grootste podium; eigen programma Jeugd & Familie |
+| Deventer Schouwburg | deventerschouwburg.nl | Eigen site blokkeert bots; de voorstellingen komen nu via deventer.info |
 | Speelgoedmuseum Deventer | hetspeelgoedmuseum.nl | Terugkerende gezinsactiviteiten (spelletjesmiddag, knutselmiddag) |
 | Dickens Festijn | dickensfestijn.nl | Datum en tijden in december |
 

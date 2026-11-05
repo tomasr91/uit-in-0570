@@ -22,6 +22,14 @@
       "$comment": "Plekken waar je altijd heen kunt, uit data/places.json (tabblad Altijd)."
     },
     {
+      "id": "deventer-info",
+      "enabled": true,
+      "options": {
+        "$comment": "Stadsagenda per dag (/agenda/DD-MM-JJJJ/, bladeren met ?p=N) plus de kinderlijst; categorieën voor de eerste 14 dagen. Zie city/adapters/deventer-info.ts.",
+        "catDays": 14
+      }
+    },
+    {
       "id": "mimik",
       "enabled": true,
       "$comment": "Film, theater en Junior van MIMIK via de sitemap en de pagina per titel (zie city/adapters/mimik.ts). /mvc/ is verboden in robots.txt en wordt niet gebruikt."
