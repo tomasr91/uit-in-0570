@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "collectedAt": "2026-11-05T19:00:00Z",
+    "collectedBy": "Claude (webonderzoek)",
+    "method": "Vaste plekken: per plek opgezocht via Kidsproof Apeldoorn-Deventer, Go-kids, museum.nl en Fijnuit. Alleen wat bevestigd is; openingstijden zijn weggelaten waar bronnen elkaar tegenspraken of niets vermeldden. Openingstijden altijd nakijken bij de bron. Coördinaten worden tijdens de update opgezocht (PDOK).",
+    "note": "Geen agenda-items: plekken waar je zonder afspraak heen kunt. In de app onder het tabblad Altijd."
+  },
+  "places": [
+    {
+      "id": "speelgoedmuseum-deventer",
+      "name": "Speelgoedmuseum Deventer",
+      "kind": "Museum",
+      "audiences": ["kinderen", "gezin"],
+      "indoor": "binnen",
+      "price": "betaald",
+      "open": "di–zo 11–17",
+      "address": "Brink 47, 7411 BV Deventer",
+      "locality": "Binnenstad",
+      "url": "https://www.kidsproof.nl/apeldoorn/uitje/speelgoedmuseum-deventer-museum-kinderen-speelgoed-eropuit",
+      "summary": "Grote speelgoedcollectie in oude pakhuizen aan de Brink, met veel om zelf mee te spelen; 0–3 jaar gratis, Museumkaart geldig."
+    },
+    {
+      "id": "museum-de-waag",
+      "name": "Museum De Waag",
+      "kind": "Museum",
+      "audiences": ["gezin", "volwassenen"],
+      "indoor": "binnen",
+      "price": "betaald",
+      "address": "Brink 56, 7411 BV Deventer",
+      "locality": "Binnenstad",
+      "url": "https://www.fijnuit.nl/lichtenvoorde/dagje-uit-met-kinderen/?page=3",
+      "summary": "Stadsmuseum over de geschiedenis van Deventer in het oude waaggebouw op de Brink."
+    },
+    {
+      "id": "ulebelt",
+      "name": "Kinderboerderij De Ulebelt",
+      "kind": "Natuur & dieren",
+      "audiences": ["kinderen", "gezin"],
+      "indoor": "buiten",
+      "price": "gratis",
+      "address": "Maatmansweg 3, Deventer",
+      "locality": "Deventer",
+      "url": "https://www.kidsproof.nl/apeldoorn/uitje/De-Ulebelt-ulebelt-kinderboerderij-deventer/",
+      "summary": "Kinderboerderij in het Gooikerspark met natuurspeelplaatsen en een waterspeelplek; gratis."
+    },
+    {
+      "id": "wsv-de-ijssel",
+      "name": "Speeltuin en Dierenbos WSV De IJssel",
+      "kind": "Natuur & dieren",
+      "audiences": ["kinderen", "gezin"],
+      "indoor": "buiten",
+      "price": "gratis",
+      "address": "Kersenstraat 2, Deventer",
+      "locality": "Zandweerd",
+      "url": "https://www.kidsproof.nl/apeldoorn/uitje/wsv-de-ijssel-speeltuin-kinderboerderij-deventer/",
+      "summary": "Wijkspeeltuin in de Zandweerd met een klein dierenbos (geitjes, kippen, konijnen, cavia's)."
+    },
+    {
+      "id": "nieuwe-plantsoen",
+      "name": "Het Nieuwe Plantsoen",
+      "kind": "Spelen buiten",
+      "audiences": ["kinderen", "gezin"],
+      "indoor": "buiten",
+      "price": "gratis",
+      "address": "Ceintuurbaan 1, Deventer",
+      "locality": "Deventer",
+      "url": "https://www.kidsproof.nl/apeldoorn/eropuit/het-nieuwe-plantsoen/hertenkamp-waterspeeltuin-speeltuin-deventer",
+      "summary": "Park bij de watertoren met hertenkamp, speeltuin en een spetterplek met waterpomp."
+    },
+    {
+      "id": "woeste-willem",
+      "name": "Woeste Willem Speelnatuur",
+      "kind": "Spelen buiten",
+      "audiences": ["kinderen", "gezin"],
+      "indoor": "buiten",
+      "price": "gratis",
+      "address": "Worp 109, 7419 AC Deventer",
+      "locality": "De Worp",
+      "url": "https://go-kids.nl/stedendriehoek/erop-uit/woeste-willem-speelnatuur",
+      "summary": "Natuurspeelplaats in de uiterwaarden achter de dijk bij het Worpplantsoen: klei, water en klauteren. Kleren die vies mogen."
+    },
+    {
+      "id": "vogeleiland",
+      "name": "Vogeleiland (Rijsterborgherpark)",
+      "kind": "Natuur & dieren",
+      "audiences": ["kinderen", "gezin"],
+      "indoor": "buiten",
+      "price": "gratis",
+      "address": "Stationsstraat 2, Deventer",
+      "locality": "Binnenstad",
+      "url": "https://go-kids.nl/zwolle/erop-uit/uitje-dieren-dierentuin/gratis-uitjes-met-kinderen",
+      "summary": "Eilandje met dieren in het Rijsterborgherpark, vlak bij station en binnenstad; gratis."
+    },
+    {
+      "id": "bibliotheek-centrum",
+      "name": "Bibliotheek Deventer Centrum",
+      "kind": "Spelen binnen",
+      "audiences": ["kinderen", "gezin", "volwassenen"],
+      "indoor": "binnen",
+      "price": "gratis",
+      "address": "Stromarkt 18, 7411 PK Deventer",
+      "locality": "Binnenstad",
+      "url": "https://www.kidsproof.nl/apeldoorn/uitje/bibliotheek-deventer-centrum-bibliotheek-deventer-centrum-eropuit",
+      "summary": "Centrale bibliotheek met jeugdafdeling; regelmatig voorleesuurtjes (BoekStart) en kinderactiviteiten."
+    },
+    {
+      "id": "de-scheg",
+      "name": "Zwemparadijs De Scheg",
+      "kind": "Zwemmen",
+      "audiences": ["kinderen", "gezin"],
+      "indoor": "binnen",
+      "price": "betaald",
+      "address": "Piet van Donkplein 1, 7422 LW Deventer",
+      "locality": "Deventer",
+      "url": "https://www.kidsproof.nl/apeldoorn/uitje/De-Scheg-eropuit-zwembad-zwemparadijs/",
+      "summary": "Subtropisch zwembad met glijbanen en een water-en-zandspeelplek voor kinderen t/m 5 jaar; in hetzelfde gebouw een ijsbaan."
+    }
+  ]
+}

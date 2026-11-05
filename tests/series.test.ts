@@ -1,0 +1,253 @@
+import { describe, expect, it } from 'vitest';
+import { collapseSeries, recurrenceLabel } from '../src/domain/series';
+import { buildLists, DEFAULT_LIST_OPTIONS } from '../src/domain/views';
+import { testActivity } from './fixtures';
+
+// TESTDATA: verzonnen activiteiten.
+const act = (o: Parameters<typeof testActivity>[0]) => testActivity({ isTestData: false, audiences: ['volwassenen'], categories: ['theater'], venue: { name: 'Testzaal', geoPrecision: 'unknown' }, ...o });
+
+describe('vaste reeksen samenvoegen', () => {
+  const weekly = ['2026-10-24', '2026-10-31', '2026-11-07', '2026-11-14'].map((d, i) =>
+    act({ id: `w${i}`, title: '[TESTDATA] Quiz Night', start: `${d}T20:00` }),
+  );
+  it('wordt één doorlopende regel met het patroon', () => {
+    const out = collapseSeries(weekly, '2026-10-22');
+    expect(out).toHaveLength(1);
+    expect(out[0]).toMatchObject({ start: '2026-10-24', end: '2026-11-14', recurrenceNote: 'Elke zaterdag · 20:00' });
+    expect(out[0].id).toMatch(/^reeks-/);
+  });
+  it('staat onder doorlopend en niet in de dagagenda', () => {
+    const l = buildLists(weekly, { ...DEFAULT_LIST_OPTIONS, audience: 'volwassenen' }, { today: '2026-10-22', period: { from: '2026-10-22', to: '2027-01-31' }, children: [] });
+    expect(l.days).toHaveLength(0);
+    expect(l.ongoing).toHaveLength(1);
+  });
+  it('alleen in een weekend met een datum van de reeks', () => {
+    const l = buildLists(weekly, { ...DEFAULT_LIST_OPTIONS, audience: 'volwassenen' }, { today: '2026-10-22', period: { from: '2026-10-26', to: '2026-10-30' }, children: [] });
+    expect(l.ongoing).toHaveLength(0);
+  });
+  it('drie voorstellingen in één weekend zijn geen reeks', () => {
+    const run = ['2026-10-23', '2026-10-24', '2026-10-25'].map((d, i) => act({ id: `r${i}`, title: '[TESTDATA] Toneelstuk', start: `${d}T20:00` }));
+    expect(collapseSeries(run, '2026-10-22')).toHaveLength(3);
+  });
+  it('de bron zegt doorlopend: ook met één bekende datum', () => {
+    const one = act({ title: '[TESTDATA] Comedy Night', start: '2026-10-23T20:30', end: '2026-10-24', rolling: true, recurrenceNote: 'Elke vr en za · 20:30' });
+    const out = collapseSeries([one], '2026-10-22');
+    expect(out[0]).toMatchObject({ recurrenceNote: 'Elke vr en za · 20:30', rolling: true, occurrences: ['2026-10-23', '2026-10-24'] });
+  });
+  it('(bijna) dagelijks wordt ook één regel: "Dagelijks"', () => {
+    const days = Array.from({ length: 21 }, (_, i) => `2026-11-${String(5 + i).padStart(2, '0')}`).filter((_, i) => i !== 1);
+    const daily = days.map((d, i) => act({ id: `d${i}`, title: '[TESTDATA] Speurtocht', start: `${d}T08:00`, end: `${d}T20:00` }));
+    const out = collapseSeries(daily, '2026-11-05');
+    expect(out).toHaveLength(1);
+    expect(out[0].recurrenceNote).toBe('Dagelijks · 08:00');
+  });
+  it('vier losse weekdagen met gaten is geen dagelijkse reeks', () => {
+    const scattered = ['2026-11-02', '2026-11-04', '2026-11-12', '2026-11-20'].map((d, i) => act({ id: `s${i}`, title: '[TESTDATA] Concert', start: `${d}T20:00` }));
+    expect(collapseSeries(scattered, '2026-11-01')).toHaveLength(4);
+  });
+  it('label', () => {
+    expect(recurrenceLabel(['2026-10-23', '2026-10-24', '2026-10-30', '2026-11-06'], ['20:30', '20:30', '20:30', '20:30'])).toBe('Elke vr en za · 20:30');
+  });
+});
+
+import { kindLabel } from '../src/domain/kind';
+describe('soort uit de titel als de bron niets zegt', () => {
+  it.each([
+    ['[TESTDATA] Estella Boersma All Night Long', 'Uitgaan'],
+    ['[TESTDATA] PowerPoint Karaoke', 'Uitgaan'],
+    ['[TESTDATA] PechaKucha Night #50', 'Lezing'],
+    ['[TESTDATA] Open Mic: Rouw aan het Woord', 'Ontmoeting'],
+    ['[TESTDATA] Open podium', 'Theater'],
+    ['[TESTDATA] Boek & Yoga (4-8 jaar)', 'Workshop'],
+    ['[TESTDATA] Slaapfeestje voor knuffels', 'Feest & festival'],
+    ['[TESTDATA] USP Night Run', 'Sport & zwemmen'],
+    ['[TESTDATA] Langs de muurschilderingen van Utrecht Noord', 'Rondleiding'],
+    ['[TESTDATA] Jeremy Pelt Quintet', 'Overig'],
+  ])('%s', (title, kind) => {
+    expect(kindLabel({ title, categories: ['overig'] })).toBe(kind);
+  });
+});
+
+import { overlapsPeriod } from '../src/domain/filters';
+import { weekdaysFromNote } from '../src/domain/series';
+describe('vaste dag en datumkeuze', () => {
+  it('weekdagen uit de notitie', () => {
+    expect(weekdaysFromNote('Elke vr en za · 20:30')).toEqual([5, 6]);
+    expect(weekdaysFromNote('Elke woensdag')).toEqual([3]);
+    expect(weekdaysFromNote('Zo 25 okt, 22 nov en 27 dec · 15:00')).toBeUndefined();
+  });
+  const rolling = act({ title: '[TESTDATA] Comedy', start: '2026-10-23T20:30', end: '2026-10-24', rolling: true, recurrenceNote: 'Elke vr en za · 20:30' });
+  it('doorlopend op vr en za: niet op een woensdag', () => {
+    expect(overlapsPeriod(rolling, { from: '2026-10-28', to: '2026-10-28' })).toBe(false);
+  });
+  it('wel op een latere vrijdag, ook na de eerstvolgende bekende datum', () => {
+    expect(overlapsPeriod(rolling, { from: '2026-11-06', to: '2026-11-06' })).toBe(true);
+  });
+  it('samengevoegde reeks op donderdag: niet op woensdag, wel op donderdag', () => {
+    const thu = ['2026-10-22', '2026-10-29', '2026-11-05', '2026-11-12'].map((d, i) => act({ id: `t${i}`, title: '[TESTDATA] Spelletjesmiddag', start: `${d}T15:00` }));
+    const [s] = collapseSeries(thu, '2026-10-22');
+    expect(overlapsPeriod(s, { from: '2026-10-28', to: '2026-10-28' })).toBe(false);
+    expect(overlapsPeriod(s, { from: '2026-10-29', to: '2026-10-29' })).toBe(true);
+  });
+});
+
+import { notAnOuting } from '../collector/outings';
+describe('geen uitje', () => {
+  it.each([
+    [{ title: '[TESTDATA] Spot de strik en win!' }, 'actie of campagne'],
+    [{ title: '[TESTDATA] Stem op het mooiste kasteel' }, 'actie of campagne'],
+    [{ title: '[TESTDATA] VriendenLoterij Museummaand' }, 'actie of campagne'],
+    [{ title: '[TESTDATA] Leesbanken', venue: { name: 'Diverse locaties Utrecht', geoPrecision: 'unknown' }, allDay: true, start: '2026-10-01', end: '2026-11-30' }, 'campagne op diverse locaties'],
+  ])('%o', (o, why) => {
+    expect(notAnOuting(act(o as never))).toBe(why);
+  });
+  it('locatie uit de uitsluitlijst', () => {
+    expect(notAnOuting(act({ title: '[TESTDATA] Gezelligheid', venue: { name: 'Salon van Weleer', geoPrecision: 'unknown' } }), ['salon van weleer'])).toMatch(/locatie/);
+  });
+  it('gewone activiteit blijft', () => {
+    expect(notAnOuting(act({ title: '[TESTDATA] Winterconcert' }))).toBeUndefined();
+  });
+  it.each([
+    ['[TESTDATA] Gratis Japanse les', 'Workshop'],
+    ['[TESTDATA] Scheidingscafé', 'Ontmoeting'],
+    ['[TESTDATA] Utrechtse Bierproeverij', 'Eten & drinken'],
+    ['[TESTDATA] Wijnmakersdiner', 'Eten & drinken'],
+    ['[TESTDATA] Wintermarkt Podium Oost', 'Markt'],
+  ])('%s', (title, kind) => {
+    expect(kindLabel({ title, categories: ['overig'] })).toBe(kind);
+  });
+});
+
+import { recurrenceHintFromText } from '../src/domain/series';
+describe('vaste dagen in de omschrijving', () => {
+  it('elke maandag … en elke donderdag', () => {
+    expect(recurrenceHintFromText('Elke maandag van 10.00 tot 12.30 uur en elke donderdag van 10.00 tot 13.00 uur kun je in de oogstkraam')).toBe('Elke ma en do');
+  });
+  it('twee data plus de hint: één doorlopende reeks', () => {
+    const ms = ['2026-10-22', '2026-10-26', '2026-10-29'].map((d, i) => act({ id: `o${i}`, title: '[TESTDATA] Oogstkraam', start: `${d}T10:00`, recurrenceHint: 'Elke ma en do' }));
+    const out = collapseSeries(ms, '2026-10-22');
+    expect(out).toHaveLength(1);
+    expect(out[0].recurrenceNote).toBe('Elke ma en do · 10:00');
+  });
+  it('één datum met de hint blijft een losse activiteit', () => {
+    expect(collapseSeries([act({ title: '[TESTDATA] Rondleiding', start: '2026-10-25T14:00', recurrenceHint: 'Elke zondag' })], '2026-10-22')[0].id).not.toMatch(/^reeks-/);
+  });
+});
+
+describe('korte periode is geen wekelijkse reeks', () => {
+  it('label over minder dan twee weken noemt de data', () => {
+    expect(recurrenceLabel(['2026-10-22', '2026-10-23', '2026-10-29'], ['10:00', '10:00', '10:00'])).not.toMatch(/^Elke/);
+  });
+});
+
+import { seriesNote } from '../src/domain/series';
+describe('oude "Elke …" over een korte periode', () => {
+  it('Varende Kerstverhalen: de data zelf, met begindatum', () => {
+    const a = act({ title: '[TESTDATA] Varende verhalen', start: '2026-12-20T20:00', end: '2026-12-29', recurrenceNote: 'Elke di en zo', occurrences: ['2026-12-20', '2026-12-27', '2026-12-29'] });
+    expect(seriesNote(a)).toBe('20 dec, 27 dec en 29 dec · 20:00');
+  });
+});
+
+import { expandOccurrences } from '../src/domain/views';
+describe('losse speeldata in de agenda', () => {
+  it('voorstelling op 22 en 23 okt: twee agendaregels, niet doorlopend', () => {
+    const a = act({ title: '[TESTDATA] Voorstelling', start: '2026-10-22T19:30', end: '2026-10-23', recurrenceNote: '22 okt en 23 okt · 19:30', occurrences: ['2026-10-22', '2026-10-23'] });
+    const out = expandOccurrences([a]);
+    expect(out.map((x) => x.start)).toEqual(['2026-10-22T19:30', '2026-10-23T19:30']);
+    expect(out[0].recurrenceNote).toBeUndefined();
+  });
+  it('wekelijkse reeks blijft één regel', () => {
+    const a = act({ title: '[TESTDATA] Quiz', start: '2026-10-22', end: '2026-11-12', recurrenceNote: 'Elke donderdag · 20:00', occurrences: ['2026-10-22', '2026-10-29', '2026-11-05', '2026-11-12'] });
+    expect(expandOccurrences([a])).toHaveLength(1);
+  });
+});
+
+import { canonicalKind } from '../src/domain/kind';
+describe('samengevoegde labels', () => {
+  it.each([
+    ['Cabaret', 'Comedy'],
+    ['Comedy & cabaret', 'Comedy'],
+    ['Toneel', 'Theater'],
+    ['Familievoorstelling', 'Kindervoorstelling'],
+    ['Kleuterbios', 'Film'],
+    ['Indie', 'Concert · Indie'],
+    ['Pop', 'Concert · Pop & rock'],
+    ['Concert · Rock', 'Concert · Pop & rock'],
+    ['Opera', 'Concert · Opera'],
+    ['Club', 'Uitgaan'],
+  ])('%s → %s', (k, out) => expect(canonicalKind(k)).toBe(out));
+});
+
+import { inspirationList } from '../src/domain/views';
+describe('doorlopend zonder einddatum', () => {
+  const rolling = act({ title: '[TESTDATA] Doolhof', start: '2026-10-23', end: '2026-10-23', rolling: true, recurrenceNote: 'Doorlopend' });
+  it('staat niet in de lijsten', () => {
+    const l = buildLists([rolling], { ...DEFAULT_LIST_OPTIONS, audience: 'volwassenen' }, { today: '2026-10-22', period: { from: '2026-10-22', to: '2026-12-31' }, children: [] });
+    expect(l.days.length + l.ongoing.length).toBe(0);
+  });
+  it('wel in de inspiratielijst', () => {
+    expect(inspirationList([rolling], 'volwassenen').map((a) => a.title)).toEqual(['[TESTDATA] Doolhof']);
+  });
+});
+
+import { placeToRaw } from '../collector/adapters/places';
+import { normalize } from '../collector/normalize';
+describe('vaste plekken', () => {
+  const raw = placeToRaw({ id: 't', name: '[TESTDATA] Speeltuin', kind: 'Spelen buiten', audiences: ['kinderen', 'gezin'], indoor: 'buiten', price: 'gratis', open: 'dagelijks', locality: 'Vleuten', url: 'https://example.invalid' }, { today: '2026-10-22', until: '2027-01-31' }, '2026-10-22T12:00:00Z');
+  it('wordt een doorlopende plek zonder einddatum, alleen in Altijd', () => {
+    const a = { ...normalize(raw), isTestData: false };
+    expect(a).toMatchObject({ rolling: true, recurrenceNote: 'Dagelijks', kind: 'Spelen buiten' });
+    const l = buildLists([a], { ...DEFAULT_LIST_OPTIONS, audience: 'kinderen' }, { today: '2026-10-22', period: { from: '2026-10-22', to: '2027-01-21' }, children: [] });
+    expect(l.days.length + l.ongoing.length).toBe(0);
+    expect(inspirationList([a], 'kinderen')).toHaveLength(1);
+  });
+});
+
+import { openDays, openInPeriod } from '../src/domain/series';
+describe('open dagen', () => {
+  it.each([
+    ['dagelijks', [0, 1, 2, 3, 4, 5, 6]],
+    ['di–zo 10–17', [0, 2, 3, 4, 5, 6]],
+    ['di, wo, vr–zo', [0, 2, 3, 5, 6]],
+    ['vr–wo 10–16.30 (do dicht)', [0, 1, 2, 3, 5, 6]],
+    ['Elke vr en za · 20:30', [5, 6]],
+    ['wo, za, zo', [0, 3, 6]],
+    ['Vaste plek', undefined],
+  ])('%s', (t, days) => expect(openDays(t)).toEqual(days));
+  it('alleen op vrijdag: niet in een weekend zonder vrijdag', () => {
+    expect(openInPeriod('Elke vrijdag · 19:00', '2026-10-24', '2026-10-25')).toBe(false);
+    expect(openInPeriod('Elke vrijdag · 19:00', '2026-10-23', '2026-10-25')).toBe(true);
+  });
+});
+
+describe('één label uit de vaste lijst', () => {
+  it('kinderstuk wordt Kindervoorstelling, volwassenenstuk blijft Theater', () => {
+    expect(kindLabel({ title: '[TESTDATA] Dag Poes (4+)', kind: 'Theater', categories: ['theater'], audiences: ['kinderen', 'gezin'] })).toBe('Kindervoorstelling');
+    expect(kindLabel({ title: '[TESTDATA] Hamlet', kind: 'Theater', categories: ['theater'], audiences: ['volwassenen'] })).toBe('Theater');
+    expect(kindLabel({ title: "[TESTDATA] Babyconcert 'Ik droom'", categories: ['muziek'], audiences: ['kinderen'] })).toBe('Kindervoorstelling');
+  });
+  it('fijne labels vallen in de vaste lijst', () => {
+    expect(kindLabel({ title: 'Ballorig', kind: 'Spelen binnen', categories: [] })).toBe('Spelen');
+    expect(kindLabel({ title: 'Sterrenkijkavonden', kind: 'Expositie', categories: [] })).toBe('Museum');
+    expect(kindLabel({ title: 'Doloris Anoma Maze', kind: 'Expositie', categories: [] })).toBe('Expositie');
+    expect(kindLabel({ title: 'Zwembad Den Hommel', kind: 'Zwemmen', categories: [] })).toBe('Sport & zwemmen');
+    expect(kindLabel({ title: 'Lumen', kind: 'Lichtroute', categories: [] })).toBe('Feest & festival');
+  });
+});
+
+describe('festival: label naar wat je gaat doen', () => {
+  it.each([
+    ['Good Grief: Nicolaïkerk', [], 'Ontmoeting'],
+    ['Nacht van de Wijn festival', [], 'Eten & drinken'],
+    ['Poëziefestival', [], 'Lezing'],
+    ['Le Guess Who?', ['muziek'], 'Concert'],
+    ['Winterkost: Rapunzel (3+)', ['feest', 'theater'], 'Kindervoorstelling'],
+    ['Workshop: Een lichtje voor Sint Maarten (6+)', ['feest', 'workshop'], 'Workshop'],
+    ['Intocht Sinterklaas in Leidsche Rijn Centrum', ['feest'], 'Feest & festival'],
+  ] as const)('%s', (title, categories, kind) => {
+    expect(kindLabel({ title, kind: 'Festival', categories: [...categories] as never, audiences: ['volwassenen', 'kinderen'] })).toBe(kind);
+  });
+  it('voorstelling op het Prentenboekenfestival is geen voorlezen', () => {
+    expect(kindLabel({ title: 'nijntje op de fiets 2+ – Klein Amsterdam Producties | Prentenboekjesfestival', kind: 'Jeugdtheater', categories: ['voorlezen', 'theater'] })).toBe('Kindervoorstelling');
+  });
+});

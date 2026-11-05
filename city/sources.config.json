@@ -1,0 +1,38 @@
+{
+  "$comment": "Bronnen voor de nachtelijke update van Uit in 0570. Zet 'enabled' op false om een bron uit te schakelen. Bronnen met type ical, jsonld of tribe werken zonder code; eigen adapters staan in city/adapters/index.ts. Uitleg per bron en de bronnen die nog onderzocht worden: city/BRONNEN.md.",
+  "windowMonths": 3,
+  "windowMarginDays": 14,
+  "maxDetailPagesPerSource": 400,
+  "pruneExpiredAfterDays": 60,
+  "$diagnoseUrls": "Standaardlijst voor de workflow Bronnen diagnose (collector/diagnose.ts zonder argumenten): de Deventer bronnen die nog een adapter nodig hebben.",
+  "diagnoseUrls": [
+    "https://www.deventerschouwburg.nl/",
+    "https://www.mimik.nl/",
+    "https://www.burgerweeshuis.nl/",
+    "https://www.hetspeelgoedmuseum.nl/",
+    "https://dickensfestijn.nl/"
+  ],
+  "sources": [
+    {
+      "id": "handmatig",
+      "enabled": true,
+      "$comment": "Activiteiten in data/curated/*.json (met de hand of door de skill bronnen-verversen)."
+    },
+    {
+      "id": "vaste-plekken",
+      "enabled": true,
+      "$comment": "Plekken waar je altijd heen kunt, uit data/places.json (tabblad Altijd)."
+    },
+    {
+      "id": "pathe",
+      "enabled": false,
+      "$comment": "Deventer heeft geen Pathé (wel Vue Deventer en de filmzalen van MIMIK). Blijft uit.",
+      "homepage": "https://www.pathe.nl/nl/bioscopen",
+      "options": {
+        "cinemas": [],
+        "localities": {},
+        "ratings": ["al", "-6ans", "-9ans", "-12ans"]
+      }
+    }
+  ]
+}

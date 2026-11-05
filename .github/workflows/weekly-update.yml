@@ -1,0 +1,152 @@
+# Dagelijkse update + publicatie op GitHub Pages.
+#
+#  - Elke nacht (02:17 UTC = 03:17 in de winter, 04:17 in de zomer), met reserve-runs om 03:47, 04:47 en 05:47 UTC als GitHub de eerste overslaat:
+#    bronnen ophalen → SQLite bijwerken → JSON exporteren → committen → app bouwen → publiceren.
+#  - Handmatig starten kan via Actions → "Dagelijkse update" → Run workflow
+#    (optioneel met één bron-ID uit city/sources.config.json).
+#  - Codewijzigingen worden apart en direct gepubliceerd door publish.yml ("Publiceren").
+#
+# Eenmalig instellen: Settings → Pages → Source: "GitHub Actions".
+# Optioneel: Settings → Secrets and variables → Actions → Variables:
+#   COLLECTOR_CONTACT  (e-mailadres in de User-Agent, aanbevolen)
+#   GEOCODER=nominatim en NOMINATIM_EMAIL (preciezere afstanden)
+name: Dagelijkse update
+
+on:
+  schedule:
+    - cron: '17 2 * * *'
+    # Reserves: GitHub slaat geplande runs soms over of start ze uren later. Een reserve doet alleen iets
+    # als er vandaag (UTC) nog niets is bijgewerkt.
+    - cron: '47 3 * * *'
+    - cron: '47 4 * * *'
+    - cron: '47 5 * * *'
+  # Wekker van buitenaf: de geplande Claude-taak "Ochtendcontrole update" zet de datum in dit bestand als er
+  # vandaag nog niets is bijgewerkt. Een push start direct, de klok van GitHub start soms uren te laat of niet.
+  push:
+    branches: [main]
+    paths: ['.github/run-request']
+  workflow_dispatch:
+    inputs:
+      source:
+        description: 'Alleen deze bron ophalen (leeg = alle ingeschakelde bronnen)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+  issues: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: agenda-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    # Niet in de motor zelf (tomasr91/uit-core), wel in elke stadsrepo.
+    if: github.repository != 'tomasr91/uit-core'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    outputs:
+      skip: ${{ steps.guard.outputs.skip }}
+    steps:
+      # Altijd de nieuwste main: een run die in de wachtrij stond moet voortbouwen op de data van de vorige run.
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Reserve-run nodig?
+        id: guard
+        run: |
+          skip=false
+          if { [ -n "${{ github.event.schedule }}" ] && [ "${{ github.event.schedule }}" != "17 2 * * *" ]; } || [ "${{ github.event_name }}" = "push" ]; then
+            last=$(node -e "const s=require('./public/data/status.json');console.log(s.lastSuccessfulRun||'')")
+            # Een regel "forceer" in .github/run-request start de update toch (bv. na een nieuwe bron).
+            if [ "${{ github.event_name }}" = "push" ] && grep -qiE '^\s*forceer\s*$' .github/run-request; then
+              echo "Update geforceerd via .github/run-request."
+            elif [ "${last:0:10}" = "$(date -u +%F)" ]; then
+              echo "Vandaag al bijgewerkt ($last); reserve-run slaat over."
+              skip=true
+            fi
+          fi
+          echo "skip=$skip" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-node@v4
+        if: steps.guard.outputs.skip != 'true'
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+        if: steps.guard.outputs.skip != 'true'
+      - run: npm test
+        if: steps.guard.outputs.skip != 'true'
+
+      - name: Bronnen ophalen en database bijwerken
+        if: steps.guard.outputs.skip != 'true'
+        env:
+          COLLECTOR_CONTACT: ${{ vars.COLLECTOR_CONTACT }}
+          GEOCODER: ${{ vars.GEOCODER }}
+          NOMINATIM_EMAIL: ${{ vars.NOMINATIM_EMAIL }}
+        run: |
+          if [ -n "${{ github.event.inputs.source }}" ]; then
+            npm run collect -- --source=${{ github.event.inputs.source }}
+          else
+            npm run collect
+          fi
+
+      - name: Bijgewerkte data committen
+        if: steps.guard.outputs.skip != 'true'
+        run: |
+          git config user.name "agenda-bot"
+          git config user.email "agenda-bot@users.noreply.github.com"
+          git add -A data/agenda.sqlite data/curated public/data/
+          if git diff --cached --quiet; then
+            echo "Geen wijzigingen in de data."
+          else
+            git commit -m "Dagelijkse update $(date -u +%Y-%m-%d)"
+            git pull --rebase
+            git push
+          fi
+
+      - name: Melding bij bronnen die al dagen mislukken
+        if: steps.guard.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          body="$(node scripts/check-sources.mjs)"
+          title="Bronnen mislukken"
+          nr=$(gh issue list --state open --label bronnen --json number --jq '.[0].number' 2>/dev/null || true)
+          if [ -n "$body" ]; then
+            gh label create bronnen --color B60205 --description "Automatische melding over bronnen" 2>/dev/null || true
+            if [ -n "$nr" ]; then gh issue edit "$nr" --body "$body"; else gh issue create --title "$title" --label bronnen --body "$body"; fi
+          elif [ -n "$nr" ]; then
+            gh issue close "$nr" --comment "Alle bronnen werken weer."
+          fi
+
+      # Code kan tijdens het ophalen gewijzigd zijn: bouw met de nieuwste versie, zodat deze run nooit een oudere app terugzet.
+      - name: Nieuwste code ophalen
+        if: steps.guard.outputs.skip != 'true'
+        run: git pull --rebase origin main
+      - run: npm ci && npm run build
+        if: steps.guard.outputs.skip != 'true'
+      - uses: actions/configure-pages@v5
+        if: steps.guard.outputs.skip != 'true'
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.guard.outputs.skip != 'true'
+        with:
+          path: dist
+
+  deploy:
+    needs: update
+    if: needs.update.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

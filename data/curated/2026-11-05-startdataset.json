@@ -1,0 +1,115 @@
+{
+  "meta": {
+    "collectedAt": "2026-11-05T19:00:00Z",
+    "collectedBy": "Claude (webonderzoek in opdracht van de gebruiker)",
+    "method": "Startdataset Uit in 0570, nagelopen op 5-11-2026: Dickens Festijn via de officiële site; Sinterklaasintochten Deventer en Schalkhaar via Go-kids (secundair). Alleen gegevens die op de bronpagina's stonden; ontbrekende informatie staat als onzekerheid vermeld.",
+    "note": "Samenvattingen zijn zelf geschreven, geen brontekst."
+  },
+  "events": [
+    {
+      "sourceName": "Go-kids (secundaire bron)",
+      "sourceEventId": "gk-intocht-schalkhaar-2026",
+      "url": "https://go-kids.nl/zwolle/agenda/sinterklaasintocht-schalkhaar-2026",
+      "title": "Intocht Sinterklaas Schalkhaar",
+      "start": "2026-11-28T12:00",
+      "venueName": "Dorpskern Schalkhaar",
+      "locality": "Schalkhaar",
+      "priceText": "Gratis",
+      "bookingStatus": "niet-nodig",
+      "categories": ["feest"],
+      "audiences": ["gezin", "kinderen"],
+      "indoor": "buiten",
+      "special": true,
+      "estimatedMinMonths": 18,
+      "estimatedMaxMonths": 108,
+      "summary": "Sinterklaas en zijn Pieten trekken door Schalkhaar; de intocht begint om 12.00 uur.",
+      "extraUncertainties": [
+        "Route en eindtijd niet vermeld",
+        "Gemeld door een secundaire bron; controleer bij de organisatie"
+      ],
+      "confidence": "middel",
+      "hints": [],
+      "geoPrecision": "approx",
+      "checkedAt": "2026-11-05T19:00:00Z"
+    },
+    {
+      "sourceName": "Go-kids (secundaire bron)",
+      "sourceEventId": "gk-intocht-deventer-2026",
+      "url": "https://go-kids.nl/zwolle/agenda/sinterklaasintocht-deventer-2026",
+      "title": "Intocht Sinterklaas Deventer",
+      "start": "2026-12-05T09:15",
+      "venueName": "Binnenstad Deventer",
+      "locality": "Binnenstad",
+      "priceText": "Gratis",
+      "bookingStatus": "niet-nodig",
+      "categories": ["feest"],
+      "audiences": ["gezin", "kinderen"],
+      "indoor": "buiten",
+      "special": true,
+      "estimatedMinMonths": 18,
+      "estimatedMaxMonths": 108,
+      "cautions": ["Kan erg druk zijn langs het water"],
+      "summary": "Sinterklaas komt per boot aan in Deventer en trekt door de binnenstad; het feest begint om 9.15 uur.",
+      "extraUncertainties": [
+        "Aankomstplaats en route voor 2026 nog niet vermeld (vorige jaren: Wellekade, daarna naar de Bergkerk)",
+        "Gemeld door een secundaire bron; controleer bij de Algemene Deventer Sinterklaas Commissie"
+      ],
+      "confidence": "middel",
+      "hints": [],
+      "geoPrecision": "approx",
+      "checkedAt": "2026-11-05T19:00:00Z"
+    },
+    {
+      "sourceName": "Dickens Festijn",
+      "sourceEventId": "dickens-2026-za",
+      "url": "https://dickensfestijn.nl/en/",
+      "title": "Dickens Festijn (zaterdag)",
+      "start": "2026-12-12T11:00",
+      "end": "2026-12-12T17:00",
+      "venueName": "Bergkwartier",
+      "locality": "Bergkwartier",
+      "priceText": "Kaartje met tijdslot; t/m 7 jaar gratis",
+      "bookingStatus": "verplicht",
+      "categories": ["festival", "feest"],
+      "audiences": ["gezin", "volwassenen"],
+      "indoor": "buiten",
+      "special": true,
+      "cautions": ["Wachtrij bij de ingang mogelijk", "Smalle straatjes: druk met een kinderwagen"],
+      "summary": "Het Bergkwartier wordt twee dagen een 19e-eeuws Engels stadje vol personages uit de boeken van Dickens.",
+      "extraUncertainties": [
+        "Toegangsprijs 2026 wisselt per bron; kijk in de officiële kaartverkoop",
+        "Programma 2026 wordt begin december bekendgemaakt"
+      ],
+      "confidence": "hoog",
+      "hints": [],
+      "geoPrecision": "approx",
+      "checkedAt": "2026-11-05T19:00:00Z"
+    },
+    {
+      "sourceName": "Dickens Festijn",
+      "sourceEventId": "dickens-2026-zo",
+      "url": "https://dickensfestijn.nl/en/",
+      "title": "Dickens Festijn (zondag)",
+      "start": "2026-12-13T11:00",
+      "end": "2026-12-13T17:00",
+      "venueName": "Bergkwartier",
+      "locality": "Bergkwartier",
+      "priceText": "Kaartje met tijdslot; t/m 7 jaar gratis",
+      "bookingStatus": "verplicht",
+      "categories": ["festival", "feest"],
+      "audiences": ["gezin", "volwassenen"],
+      "indoor": "buiten",
+      "special": true,
+      "cautions": ["Wachtrij bij de ingang mogelijk", "Smalle straatjes: druk met een kinderwagen"],
+      "summary": "Tweede dag van het Dickens Festijn in het Bergkwartier.",
+      "extraUncertainties": [
+        "Toegangsprijs 2026 wisselt per bron; kijk in de officiële kaartverkoop",
+        "Programma 2026 wordt begin december bekendgemaakt"
+      ],
+      "confidence": "hoog",
+      "hints": [],
+      "geoPrecision": "approx",
+      "checkedAt": "2026-11-05T19:00:00Z"
+    }
+  ]
+}
