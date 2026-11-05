@@ -1,14 +1,14 @@
 {
-  "lastSuccessfulRun": "2026-11-05T18:49:42.220Z",
-  "lastRun": "2026-11-05T18:49:42.220Z",
+  "lastSuccessfulRun": "2026-11-05T18:57:24.102Z",
+  "lastRun": "2026-11-05T18:57:24.102Z",
   "sources": [
     {
       "sourceId": "burgerweeshuis",
       "sourceName": "Burgerweeshuis",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-05T18:44:10.550Z",
-      "lastSuccess": "2026-11-05T18:44:10.550Z",
+      "lastAttempt": "2026-11-05T18:51:53.106Z",
+      "lastSuccess": "2026-11-05T18:51:53.106Z",
       "fetched": 37,
       "notes": "37 detailpagina's"
     },
@@ -17,8 +17,8 @@
       "sourceName": "Alternatief verzameld",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-05T18:44:10.550Z",
-      "lastSuccess": "2026-11-05T18:44:10.550Z",
+      "lastAttempt": "2026-11-05T18:51:53.106Z",
+      "lastSuccess": "2026-11-05T18:51:53.106Z",
       "fetched": 4
     },
     {
@@ -26,9 +26,9 @@
       "sourceName": "MIMIK",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-05T18:44:10.550Z",
-      "lastSuccess": "2026-11-05T18:44:10.550Z",
-      "fetched": 156,
+      "lastAttempt": "2026-11-05T18:51:53.106Z",
+      "lastSuccess": "2026-11-05T18:51:53.106Z",
+      "fetched": 121,
       "notes": "182 pagina's opgehaald, 0 uit de cache overgeslagen"
     },
     {
@@ -43,18 +43,18 @@
       "sourceName": "Vaste plekken",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-05T18:44:10.550Z",
-      "lastSuccess": "2026-11-05T18:44:10.550Z",
+      "lastAttempt": "2026-11-05T18:51:53.106Z",
+      "lastSuccess": "2026-11-05T18:51:53.106Z",
       "fetched": 9,
       "notes": "9 vaste plekken"
     }
   ],
   "totals": {
-    "active": 204,
-    "added": 193,
-    "updated": 0,
-    "cancelled": 2,
+    "active": 171,
+    "added": 22,
+    "updated": 12,
+    "cancelled": 0,
     "expired": 0,
-    "merged": 2
+    "merged": 6
   }
 }
