@@ -7,8 +7,6 @@
   "$diagnoseUrls": "Standaardlijst voor de workflow Bronnen diagnose (collector/diagnose.ts zonder argumenten): de Deventer bronnen die nog een adapter nodig hebben.",
   "diagnoseUrls": [
     "https://www.deventerschouwburg.nl/",
-    "https://www.mimik.nl/",
-    "https://www.burgerweeshuis.nl/",
     "https://www.hetspeelgoedmuseum.nl/",
     "https://dickensfestijn.nl/"
   ],
@@ -24,6 +22,16 @@
       "$comment": "Plekken waar je altijd heen kunt, uit data/places.json (tabblad Altijd)."
     },
     {
+      "id": "mimik",
+      "enabled": true,
+      "$comment": "Film, theater en Junior van MIMIK via de sitemap en de pagina per titel (zie city/adapters/mimik.ts). /mvc/ is verboden in robots.txt en wordt niet gebruikt."
+    },
+    {
+      "id": "burgerweeshuis",
+      "enabled": true,
+      "$comment": "Concerten en clubavonden van het Burgerweeshuis: /programma plus de pagina per voorstelling (zie city/adapters/burgerweeshuis.ts)."
+    },
+    {
       "id": "pathe",
       "enabled": false,
       "$comment": "Deventer heeft geen Pathé (wel Vue Deventer en de filmzalen van MIMIK). Blijft uit.",
@@ -31,7 +39,12 @@
       "options": {
         "cinemas": [],
         "localities": {},
-        "ratings": ["al", "-6ans", "-9ans", "-12ans"]
+        "ratings": [
+          "al",
+          "-6ans",
+          "-9ans",
+          "-12ans"
+        ]
       }
     }
   ]
