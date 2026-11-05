@@ -1,15 +1,35 @@
 {
-  "lastSuccessfulRun": "2026-11-05T18:33:01.366Z",
-  "lastRun": "2026-11-05T18:33:01.366Z",
+  "lastSuccessfulRun": "2026-11-05T18:49:42.220Z",
+  "lastRun": "2026-11-05T18:49:42.220Z",
   "sources": [
+    {
+      "sourceId": "burgerweeshuis",
+      "sourceName": "Burgerweeshuis",
+      "enabled": true,
+      "ok": true,
+      "lastAttempt": "2026-11-05T18:44:10.550Z",
+      "lastSuccess": "2026-11-05T18:44:10.550Z",
+      "fetched": 37,
+      "notes": "37 detailpagina's"
+    },
     {
       "sourceId": "handmatig",
       "sourceName": "Alternatief verzameld",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-05T18:32:57.356Z",
-      "lastSuccess": "2026-11-05T18:32:57.356Z",
+      "lastAttempt": "2026-11-05T18:44:10.550Z",
+      "lastSuccess": "2026-11-05T18:44:10.550Z",
       "fetched": 4
+    },
+    {
+      "sourceId": "mimik",
+      "sourceName": "MIMIK",
+      "enabled": true,
+      "ok": true,
+      "lastAttempt": "2026-11-05T18:44:10.550Z",
+      "lastSuccess": "2026-11-05T18:44:10.550Z",
+      "fetched": 156,
+      "notes": "182 pagina's opgehaald, 0 uit de cache overgeslagen"
     },
     {
       "sourceId": "pathe",
@@ -23,18 +43,18 @@
       "sourceName": "Vaste plekken",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-05T18:32:57.356Z",
-      "lastSuccess": "2026-11-05T18:32:57.356Z",
+      "lastAttempt": "2026-11-05T18:44:10.550Z",
+      "lastSuccess": "2026-11-05T18:44:10.550Z",
       "fetched": 9,
       "notes": "9 vaste plekken"
     }
   ],
   "totals": {
-    "active": 13,
-    "added": 13,
+    "active": 204,
+    "added": 193,
     "updated": 0,
-    "cancelled": 0,
+    "cancelled": 2,
     "expired": 0,
-    "merged": 0
+    "merged": 2
   }
 }
