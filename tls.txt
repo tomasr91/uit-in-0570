@@ -1,0 +1,63 @@
+=== bibliotheekdeventer.op-shop.nl
+ 0 s:CN = *.op-shop.nl
+   i:C = US, O = Let's Encrypt, CN = YE2
+   v:NotBefore: Oct 29 11:37:17 2026 GMT; NotAfter: Jan 27 11:37:16 2027 GMT
+ 1 s:C = US, O = Let's Encrypt, CN = YE2
+   i:C = US, O = ISRG, CN = Root YE
+   v:NotBefore: Sep  3 00:00:00 2025 GMT; NotAfter: Sep  2 23:59:59 2028 GMT
+ 2 s:C = US, O = ISRG, CN = Root YE
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X2
+   v:NotBefore: May 13 00:00:00 2026 GMT; NotAfter: Sep  2 23:59:59 2032 GMT
+ 3 s:C = US, O = Internet Security Research Group, CN = ISRG Root X2
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   v:NotBefore: May 13 00:00:00 2026 GMT; NotAfter: Sep  2 23:59:59 2032 GMT
+ 4 s:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   v:NotBefore: Jun  4 11:04:38 2015 GMT; NotAfter: Jun  4 11:04:38 2035 GMT
+Verify return code: 0 (ok)
+curl: 200 https://bibliotheekdeventer.op-shop.nl/ ip=185.111.111.156
+185.111.111.156 STREAM 5d5bb386-2.b-cdn.net
+185.111.111.156 DGRAM  
+185.111.111.156 RAW    
+=== hetspeelgoedmuseum.nl
+ 0 s:CN = hetspeelgoedmuseum.nl
+   i:C = US, O = Let's Encrypt, CN = YR1
+   v:NotBefore: Oct  9 01:15:50 2026 GMT; NotAfter: Jan  7 01:15:49 2027 GMT
+ 1 s:C = US, O = Let's Encrypt, CN = YR1
+   i:C = US, O = ISRG, CN = Root YR
+   v:NotBefore: Sep  3 00:00:00 2025 GMT; NotAfter: Sep  2 23:59:59 2028 GMT
+ 2 s:C = US, O = ISRG, CN = Root YR
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   v:NotBefore: May 13 00:00:00 2026 GMT; NotAfter: Sep  2 23:59:59 2032 GMT
+Verify return code: 0 (ok)
+curl: 200 https://hetspeelgoedmuseum.nl/ ip=35.214.154.247
+35.214.154.247  STREAM hetspeelgoedmuseum.nl
+35.214.154.247  DGRAM  
+35.214.154.247  RAW    
+=== www.ulebelt.nl
+ 0 s:CN = ulebelt.nl
+   i:C = GB, O = Sectigo Limited, CN = Sectigo Public Server Authentication CA DV R36
+   v:NotBefore: Feb 13 00:00:00 2026 GMT; NotAfter: Feb 13 23:59:59 2027 GMT
+ 1 s:C = GB, O = Sectigo Limited, CN = Sectigo Public Server Authentication CA DV R36
+   i:C = GB, O = Sectigo Limited, CN = Sectigo Public Server Authentication Root R46
+   v:NotBefore: Mar 22 00:00:00 2021 GMT; NotAfter: Mar 21 23:59:59 2036 GMT
+    Verify return code: 0 (ok)
+curl: 200 https://www.ulebelt.nl/ ip=185.37.70.40
+185.37.70.40    STREAM www.ulebelt.nl
+185.37.70.40    DGRAM  
+185.37.70.40    RAW    
+=== www.vuecinemas.nl
+ 0 s:CN = vuecinemas.nl
+   i:C = US, O = Google Trust Services, CN = WE1
+   v:NotBefore: Oct 12 09:16:13 2026 GMT; NotAfter: Jan 10 10:16:01 2027 GMT
+ 1 s:C = US, O = Google Trust Services, CN = WE1
+   i:C = US, O = Google Trust Services LLC, CN = GTS Root R4
+   v:NotBefore: Dec 13 09:00:00 2023 GMT; NotAfter: Feb 20 14:00:00 2029 GMT
+ 2 s:C = US, O = Google Trust Services LLC, CN = GTS Root R4
+   i:C = BE, O = GlobalSign nv-sa, OU = Root CA, CN = GlobalSign Root CA
+   v:NotBefore: Nov 15 03:43:21 2023 GMT; NotAfter: Jan 28 00:00:42 2028 GMT
+Verify return code: 0 (ok)
+curl: 200 https://www.vuecinemas.nl/ ip=172.64.151.144
+172.64.151.144  STREAM www.vuecinemas.nl
+172.64.151.144  DGRAM  
+172.64.151.144  RAW    

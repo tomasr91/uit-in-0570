@@ -1,0 +1,127 @@
+{
+  "at": "2026-11-06T06:38:39.408Z",
+  "userAgent": "UitIn0570Bot/0.1 (persoonlijke gezinsagenda; )",
+  "results": [
+    {
+      "url": "https://bibliotheekdeventer.op-shop.nl/?categories%5B%5D=2&search=",
+      "robots": {
+        "status": 200,
+        "text": "User-agent: *\nAllow: /\n\nUser-agent: SemrushBot\nDisallow: /"
+      },
+      "page": {
+        "url": "https://bibliotheekdeventer.op-shop.nl/?categories%5B%5D=2&search=",
+        "status": 200,
+        "finalUrl": "https://bibliotheekdeventer.op-shop.nl/?categories%5B%5D=2&search=",
+        "headers": {
+          "server": "BunnyCDN-DE1-1330",
+          "content-type": "text/html; charset=UTF-8"
+        },
+        "length": 73706,
+        "title": "Bibliotheek Deventer",
+        "start": "<!DOCTYPE html> <html lang=\"nl\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"> <link rel=\"icon\" href=\"https://www.bibliotheek.nl/etc/designs/styles/bnl/clientlibs/images/favicon.ico\"/> <title> Bibliotheek Deventer </title> <meta property=\"og:site_name\" content=\"Bibliotheek Deventer\"/> <link rel=\"stylesheet\" href=\"/assets/fronte",
+        "savedAs": "diag-1.html"
+      }
+    },
+    {
+      "url": "https://hetspeelgoedmuseum.nl/wp-json/wp/v2/event?per_page=20",
+      "robots": {
+        "status": 200,
+        "text": "# START YOAST BLOCK\n# ---------------------------\nUser-agent: *\nDisallow:\n\nSitemap: https://hetspeelgoedmuseum.nl/sitemap_index.xml\n# ---------------------------\n# END YOAST BLOCK"
+      },
+      "page": {
+        "url": "https://hetspeelgoedmuseum.nl/wp-json/wp/v2/event?per_page=20",
+        "status": 200,
+        "finalUrl": "https://hetspeelgoedmuseum.nl/wp-json/wp/v2/event?per_page=20",
+        "headers": {
+          "server": "nginx",
+          "content-type": "application/json; charset=UTF-8"
+        },
+        "length": 161904,
+        "title": "Activiteitenkalender - Speelgoedmuseum Deventer",
+        "start": "[{\"id\":6594,\"date\":\"2026-11-03T12:32:16\",\"date_gmt\":\"2026-11-03T11:32:16\",\"guid\":{\"rendered\":\"https:\\/\\/hetspeelgoedmuseum.nl\\/?post_type=event&#038;p=6594\"},\"modified\":\"2026-11-05T17:01:44\",\"modified_gmt\":\"2026-11-05T16:01:44\",\"slug\":\"activiteitenkalender\",\"status\":\"publish\",\"type\":\"event\",\"link\":\"https:\\/\\/hetspeelgoedmuseum.nl\\/agenda\\/activiteitenkalender\\/\",\"title\":{\"rendered\":\"Activiteitenka",
+        "savedAs": "diag-2.html"
+      }
+    },
+    {
+      "url": "https://www.ulebelt.nl/agenda/",
+      "robots": {
+        "status": 200,
+        "text": "User-agent: *\nDisallow: /site/wp-admin/\nAllow: /site/wp-admin/admin-ajax.php\n\nSitemap: https://www.ulebelt.nl/wp-sitemap.xml\n"
+      },
+      "page": {
+        "url": "https://www.ulebelt.nl/agenda/",
+        "status": 200,
+        "finalUrl": "https://www.ulebelt.nl/agenda/",
+        "headers": {
+          "server": "nginx",
+          "content-type": "text/html; charset=UTF-8"
+        },
+        "length": 95250,
+        "title": "Agenda &#8211; Ulebelt",
+        "start": "<!DOCTYPE html> <html lang=\"nl-NL\" class=\"html_stretched responsive av-preloader-disabled html_header_top html_logo_left html_main_nav_header html_menu_right html_large html_header_sticky html_header_shrinking html_header_topbar_active html_mobile_menu_phone html_header_searchicon html_content_align_center html_header_unstick_top html_header_stretch_disabled html_minimal_header html_av-submenu-hid",
+        "savedAs": "diag-3.html"
+      }
+    },
+    {
+      "url": "https://www.ulebelt.nl/evenementen/ical/",
+      "robots": {
+        "status": 200,
+        "text": "User-agent: *\nDisallow: /site/wp-admin/\nAllow: /site/wp-admin/admin-ajax.php\n\nSitemap: https://www.ulebelt.nl/wp-sitemap.xml\n"
+      },
+      "page": {
+        "url": "https://www.ulebelt.nl/evenementen/ical/",
+        "status": 404,
+        "finalUrl": "https://www.ulebelt.nl/evenementen/ical/",
+        "headers": {
+          "server": "nginx",
+          "content-type": "text/html; charset=UTF-8"
+        },
+        "length": 92405,
+        "title": "Pagina niet gevonden &#8211; Ulebelt",
+        "start": "<!DOCTYPE html> <html lang=\"nl-NL\" class=\"html_stretched responsive av-preloader-disabled html_header_top html_logo_left html_main_nav_header html_menu_right html_large html_header_sticky html_header_shrinking html_header_topbar_active html_mobile_menu_phone html_header_searchicon html_content_align_center html_header_unstick_top html_header_stretch_disabled html_minimal_header html_av-submenu-hid",
+        "savedAs": "diag-4.html"
+      }
+    },
+    {
+      "url": "https://www.vuecinemas.nl/bioscoop/deventer",
+      "robots": {
+        "status": 200,
+        "text": "User-agent: *\r\nSitemap: https://www.vuecinemas.nl/sitemap.xml\r\nDisallow: /bestel/\r\nDisallow: /kopen/\r\nDisallow: /404\r\nDisallow: /login/social-confirmation\r\nDisallow: /login/reset-password\r\nDisallow: /mijn-account\r\nDisallow: /mijn-account/changing-email\r\nDisallow: /mijn-account/activation\r\nDisallow: /mijn-account/unsubscribe\r\nDisallow: /mijn-account/account-deletion\r\n"
+      },
+      "page": {
+        "url": "https://www.vuecinemas.nl/bioscoop/deventer",
+        "status": 404,
+        "finalUrl": "https://www.vuecinemas.nl/bioscoop/deventer",
+        "headers": {
+          "server": "cloudflare",
+          "content-type": "text/html; charset=utf-8",
+          "cf-ray": "a56218a17b6cd84c-ORD"
+        },
+        "length": 54232,
+        "title": "Vue Cinemas | De Nieuwste Films &amp; Trailers | Boek Nu Tickets",
+        "start": "<!DOCTYPE html><html lang=\"nl-NL\"><head><link rel=\"apple-touch-icon-precomposed\" sizes=\"57x57\" href=\"/favicons/nl/apple-touch-icon-57x57.png\"/><link rel=\"apple-touch-icon-precomposed\" sizes=\"60x60\" href=\"/favicons/nl/apple-touch-icon-60x60.png\"/><link rel=\"apple-touch-icon-precomposed\" sizes=\"72x72\" href=\"/favicons/nl/apple-touch-icon-72x72.png\"/><link rel=\"apple-touch-icon-precomposed\" sizes=\"76x",
+        "savedAs": "diag-5.html"
+      }
+    },
+    {
+      "url": "https://www.vuecinemas.nl/sitemap.xml",
+      "robots": {
+        "status": 200,
+        "text": "User-agent: *\r\nSitemap: https://www.vuecinemas.nl/sitemap.xml\r\nDisallow: /bestel/\r\nDisallow: /kopen/\r\nDisallow: /404\r\nDisallow: /login/social-confirmation\r\nDisallow: /login/reset-password\r\nDisallow: /mijn-account\r\nDisallow: /mijn-account/changing-email\r\nDisallow: /mijn-account/activation\r\nDisallow: /mijn-account/unsubscribe\r\nDisallow: /mijn-account/account-deletion\r\n"
+      },
+      "page": {
+        "url": "https://www.vuecinemas.nl/sitemap.xml",
+        "status": 200,
+        "finalUrl": "https://www.vuecinemas.nl/sitemap.xml",
+        "headers": {
+          "server": "cloudflare",
+          "content-type": "text/xml; charset=utf-8",
+          "cf-ray": "a56218ae5ddbd84c-ORD"
+        },
+        "length": 145523,
+        "start": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <urlset xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"> <url> <loc>https://www.vuecinemas.nl/contact/faq</loc> <lastmod>2026-10-22T09:46:40+00:00</lastmod> <changefreq>always</changefreq> <priority>0.5</priority> </url> <url> <loc>https://www.vuecinemas.nl/",
+        "savedAs": "diag-6.html"
+      }
+    }
+  ]
+}
