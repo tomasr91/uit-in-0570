@@ -1,34 +1,34 @@
 {
-  "lastSuccessfulRun": "2026-11-07T09:06:05.699Z",
-  "lastRun": "2026-11-07T09:06:05.699Z",
+  "lastSuccessfulRun": "2026-11-08T09:18:05.180Z",
+  "lastRun": "2026-11-08T09:18:05.180Z",
   "sources": [
     {
       "sourceId": "burgerweeshuis",
       "sourceName": "Burgerweeshuis",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T08:50:11.240Z",
-      "lastSuccess": "2026-11-07T08:50:11.240Z",
-      "fetched": 36,
-      "notes": "36 detailpagina's"
+      "lastAttempt": "2026-11-08T09:02:19.917Z",
+      "lastSuccess": "2026-11-08T09:02:19.917Z",
+      "fetched": 34,
+      "notes": "34 detailpagina's"
     },
     {
       "sourceId": "deventer-info",
       "sourceName": "Deventer.info (VVV Deventer)",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T08:50:11.240Z",
-      "lastSuccess": "2026-11-07T08:50:11.240Z",
-      "fetched": 1260,
-      "notes": "1260 activiteit-dagen over 107 dagen; 714 met soort (3 detailpagina's opgehaald, 1 mislukt)"
+      "lastAttempt": "2026-11-08T09:02:19.917Z",
+      "lastSuccess": "2026-11-08T09:02:19.917Z",
+      "fetched": 1228,
+      "notes": "1228 activiteit-dagen over 107 dagen; 697 met soort (1 detailpagina's opgehaald, 1 mislukt)"
     },
     {
       "sourceId": "handmatig",
       "sourceName": "Alternatief verzameld",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T08:50:11.240Z",
-      "lastSuccess": "2026-11-07T08:50:11.240Z",
+      "lastAttempt": "2026-11-08T09:02:19.917Z",
+      "lastSuccess": "2026-11-08T09:02:19.917Z",
       "fetched": 4
     },
     {
@@ -36,10 +36,10 @@
       "sourceName": "MIMIK",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T08:50:11.240Z",
-      "lastSuccess": "2026-11-07T08:50:11.240Z",
+      "lastAttempt": "2026-11-08T09:02:19.917Z",
+      "lastSuccess": "2026-11-08T09:02:19.917Z",
       "fetched": 121,
-      "notes": "181 pagina's opgehaald, 0 uit de cache overgeslagen"
+      "notes": "180 pagina's opgehaald, 0 uit de cache overgeslagen"
     },
     {
       "sourceId": "pathe",
@@ -53,18 +53,18 @@
       "sourceName": "Vaste plekken",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T08:50:11.240Z",
-      "lastSuccess": "2026-11-07T08:50:11.240Z",
+      "lastAttempt": "2026-11-08T09:02:19.917Z",
+      "lastSuccess": "2026-11-08T09:02:19.917Z",
       "fetched": 9,
       "notes": "9 vaste plekken"
     }
   ],
   "totals": {
-    "active": 1373,
-    "added": 7,
-    "updated": 25,
-    "cancelled": 6,
-    "expired": 27,
-    "merged": 63
+    "active": 1342,
+    "added": 2,
+    "updated": 28,
+    "cancelled": 0,
+    "expired": 35,
+    "merged": 61
   }
 }
