@@ -1,0 +1,25 @@
+{
+  "at": "2026-11-13T17:21:00.151Z",
+  "userAgent": "UitIn0570Bot/0.1 (persoonlijke gezinsagenda; )",
+  "results": [
+    {
+      "url": "https://uitdeventer.com/wp-json/tribe/events/v1/events?per_page=50&start_date=2026-11-13&end_date=2027-02-28%2023:59:59",
+      "robots": {
+        "status": 200,
+        "text": "User-agent: *\nAllow: /\nDisallow: /*?ical=\nDisallow: /*?outlook-ical=\nDisallow: /*?eventDisplay=\nDisallow: /*?tribe-bar-date=\nDisallow: /*/feed/\nDisallow: /awards/bevestig\nDisallow: /awards/nl/bevestig\nDisallow: /awards/nieuwsbrief/eenklik\n\n# AEO-GEO v2: answer-engine crawlers welkom (GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, anthropic-ai, Claude-Web, PerplexityBot, Perplexity-User, Google-Extended, Applebot-Extended, Amazonbot e.a.)\n# kalender/iCal/feed crawl-traps geblokkeerd zodat crawl-budget naar citeerbare content gaat\n# De Uit Award: eenmalige bevestigingslinks hebben geen zoekwaarde\n\nSitemap: https://uitdeventer.com/sitemap_index.xml\n"
+      },
+      "page": {
+        "url": "https://uitdeventer.com/wp-json/tribe/events/v1/events?per_page=50&start_date=2026-11-13&end_date=2027-02-28%2023:59:59",
+        "status": 200,
+        "finalUrl": "https://uitdeventer.com/wp-json/tribe/events/v1/events?per_page=50&start_date=2026-11-13&end_date=2027-02-28%2023:59:59",
+        "headers": {
+          "server": "LiteSpeed",
+          "content-type": "application/json; charset=UTF-8"
+        },
+        "length": 219642,
+        "start": "{\"events\":[{\"id\":100,\"global_id\":\"uitdeventer.com?id=100\",\"global_id_lineage\":[\"uitdeventer.com?id=100\"],\"author\":\"0\",\"status\":\"publish\",\"date\":\"2026-06-25 11:13:11\",\"date_utc\":\"2026-06-25 09:13:11\",\"modified\":\"2026-11-13 03:24:26\",\"modified_utc\":\"2026-11-13 02:24:26\",\"url\":\"https:\\/\\/uitdeventer.com\\/event\\/lucky-fonz-iii\\/\",\"rest_url\":\"https:\\/\\/uitdeventer.com\\/wp-json\\/tribe\\/events\\/v1\\/event",
+        "savedAs": "diag-1.html"
+      }
+    }
+  ]
+}
