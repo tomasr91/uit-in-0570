@@ -30,6 +30,17 @@
       }
     },
     {
+      "id": "uitdeventer",
+      "type": "tribe",
+      "name": "Uit Deventer (uitdeventer.com)",
+      "homepage": "https://uitdeventer.com/events/",
+      "enabled": true,
+      "options": {
+        "$comment": "WordPress met The Events Calendar; REST-API /wp-json/tribe/events/v1 (robots.txt staat dat toe; ?ical= en /feed/ zijn verboden en worden niet gebruikt). Commerciële uitagenda (DW Media / Uitgroep) die veel van de Deventer Schouwburg, het Burgerweeshuis en de Lebuïnuskerk overneemt; dubbelingen voegt de app samen.",
+        "site": "https://uitdeventer.com"
+      }
+    },
+    {
       "id": "mimik",
       "enabled": true,
       "$comment": "Film, theater en Junior van MIMIK via de sitemap en de pagina per titel (zie city/adapters/mimik.ts). /mvc/ is verboden in robots.txt en wordt niet gebruikt."
