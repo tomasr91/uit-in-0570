@@ -1,14 +1,14 @@
 {
-  "lastSuccessfulRun": "2026-11-12T10:08:30.204Z",
-  "lastRun": "2026-11-12T10:08:30.204Z",
+  "lastSuccessfulRun": "2026-11-13T09:50:30.762Z",
+  "lastRun": "2026-11-13T09:50:30.762Z",
   "sources": [
     {
       "sourceId": "burgerweeshuis",
       "sourceName": "Burgerweeshuis",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-12T09:52:42.451Z",
-      "lastSuccess": "2026-11-12T09:52:42.451Z",
+      "lastAttempt": "2026-11-13T09:34:41.084Z",
+      "lastSuccess": "2026-11-13T09:34:41.084Z",
       "fetched": 37,
       "notes": "37 detailpagina's"
     },
@@ -17,18 +17,18 @@
       "sourceName": "Deventer.info (VVV Deventer)",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-12T09:52:42.451Z",
-      "lastSuccess": "2026-11-12T09:52:42.451Z",
-      "fetched": 1202,
-      "notes": "1202 activiteit-dagen over 107 dagen; 670 met soort (6 detailpagina's opgehaald, 1 mislukt)"
+      "lastAttempt": "2026-11-13T09:34:41.084Z",
+      "lastSuccess": "2026-11-13T09:34:41.084Z",
+      "fetched": 1195,
+      "notes": "1195 activiteit-dagen over 107 dagen; 662 met soort (12 detailpagina's opgehaald, 1 mislukt)"
     },
     {
       "sourceId": "handmatig",
       "sourceName": "Alternatief verzameld",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-12T09:52:42.451Z",
-      "lastSuccess": "2026-11-12T09:52:42.451Z",
+      "lastAttempt": "2026-11-13T09:34:41.084Z",
+      "lastSuccess": "2026-11-13T09:34:41.084Z",
       "fetched": 4
     },
     {
@@ -36,10 +36,10 @@
       "sourceName": "MIMIK",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-12T09:52:42.451Z",
-      "lastSuccess": "2026-11-12T09:52:42.451Z",
+      "lastAttempt": "2026-11-13T09:34:41.084Z",
+      "lastSuccess": "2026-11-13T09:34:41.084Z",
       "fetched": 113,
-      "notes": "169 pagina's opgehaald, 4 uit de cache overgeslagen"
+      "notes": "168 pagina's opgehaald, 4 uit de cache overgeslagen"
     },
     {
       "sourceId": "pathe",
@@ -53,18 +53,18 @@
       "sourceName": "Vaste plekken",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-12T09:52:42.451Z",
-      "lastSuccess": "2026-11-12T09:52:42.451Z",
+      "lastAttempt": "2026-11-13T09:34:41.084Z",
+      "lastSuccess": "2026-11-13T09:34:41.084Z",
       "fetched": 9,
       "notes": "9 vaste plekken"
     }
   ],
   "totals": {
-    "active": 1315,
-    "added": 14,
-    "updated": 32,
-    "cancelled": 1,
-    "expired": 24,
+    "active": 1307,
+    "added": 20,
+    "updated": 25,
+    "cancelled": 0,
+    "expired": 28,
     "merged": 56
   }
 }
