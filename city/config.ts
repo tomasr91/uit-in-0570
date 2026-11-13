@@ -27,15 +27,15 @@ export const CITY: CityConfig = {
     repository: 'tomasr91/uit-in-0570',
   },
 
-  /** Baksteenrood (Bergkwartier, Deventer koek), zodat Uit in 0570 zich onderscheidt van 030 (blauw) en 038 (groen). */
+  /** Zelfde kleuren als Uit in 030 (Utrecht). */
   theme: {
-    brand: '#8a3b2b',
-    brandInk: '#7a3225',
-    brandSoft: '#f4e6e2',
-    headBg: '#47231b',
-    headMuted: '#e2c9c2',
-    headLandmark: '#f0dcd5',
-    dayInk: '#47231b',
+    brand: '#24506e',
+    brandInk: '#1f4864',
+    brandSoft: '#e4edf4',
+    headBg: '#1f3a4d',
+    headMuted: '#c3d3df',
+    headLandmark: '#cfe0ec',
+    dayInk: '#1f3a4d',
   },
 
   cityName: 'Deventer',
