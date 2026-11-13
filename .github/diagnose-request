@@ -1,6 +1,3 @@
-# uitdeventer.com en indebuurt Deventer (Claude, 2026-11-13)
+# uitdeventer.com REST-API (Claude, 2026-11-13)
 bewaar
-https://uitdeventer.com/
-https://www.uitdeventer.com/agenda
-https://indebuurt.nl/deventer/
-https://indebuurt.nl/deventer/agenda/
+https://uitdeventer.com/wp-json/tribe/events/v1/events?per_page=50&start_date=2026-11-13&end_date=2027-02-28%2023:59:59
