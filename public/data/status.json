@@ -1,36 +1,36 @@
 {
-  "lastSuccessfulRun": "2026-11-18T10:29:12.618Z",
-  "lastRun": "2026-11-18T10:29:12.618Z",
+  "lastSuccessfulRun": "2026-11-19T10:39:54.244Z",
+  "lastRun": "2026-11-19T10:39:54.244Z",
   "sources": [
     {
       "sourceId": "burgerweeshuis",
       "sourceName": "Burgerweeshuis",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-18T10:13:08.503Z",
-      "lastSuccess": "2026-11-18T10:13:08.503Z",
+      "lastAttempt": "2026-11-19T10:23:58.360Z",
+      "lastSuccess": "2026-11-19T10:23:58.360Z",
       "firstSuccess": "2026-11-05T18:44:10.550Z",
-      "fetched": 36,
-      "notes": "36 detailpagina's"
+      "fetched": 37,
+      "notes": "37 detailpagina's"
     },
     {
       "sourceId": "deventer-info",
       "sourceName": "Deventer.info (VVV Deventer)",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-18T10:13:08.503Z",
-      "lastSuccess": "2026-11-18T10:13:08.503Z",
+      "lastAttempt": "2026-11-19T10:23:58.360Z",
+      "lastSuccess": "2026-11-19T10:23:58.360Z",
       "firstSuccess": "2026-11-05T19:17:00.904Z",
-      "fetched": 1218,
-      "notes": "1218 activiteit-dagen over 107 dagen; 733 met soort (7 detailpagina's opgehaald, 2 mislukt)"
+      "fetched": 1207,
+      "notes": "1207 activiteit-dagen over 107 dagen; 725 met soort (6 detailpagina's opgehaald, 2 mislukt)"
     },
     {
       "sourceId": "handmatig",
       "sourceName": "Alternatief verzameld",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-18T10:13:08.503Z",
-      "lastSuccess": "2026-11-18T10:13:08.503Z",
+      "lastAttempt": "2026-11-19T10:23:58.360Z",
+      "lastSuccess": "2026-11-19T10:23:58.360Z",
       "firstSuccess": "2026-11-05T18:32:57.356Z",
       "fetched": 4
     },
@@ -39,11 +39,11 @@
       "sourceName": "MIMIK",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-18T10:13:08.503Z",
-      "lastSuccess": "2026-11-18T10:13:08.503Z",
+      "lastAttempt": "2026-11-19T10:23:58.360Z",
+      "lastSuccess": "2026-11-19T10:23:58.360Z",
       "firstSuccess": "2026-11-05T18:44:10.550Z",
       "fetched": 117,
-      "notes": "168 pagina's opgehaald, 5 uit de cache overgeslagen"
+      "notes": "167 pagina's opgehaald, 5 uit de cache overgeslagen"
     },
     {
       "sourceId": "pathe",
@@ -57,29 +57,29 @@
       "sourceName": "Uit Deventer (uitdeventer.com)",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-18T10:13:08.503Z",
-      "lastSuccess": "2026-11-18T10:13:08.503Z",
+      "lastAttempt": "2026-11-19T10:23:58.360Z",
+      "lastSuccess": "2026-11-19T10:23:58.360Z",
       "firstSuccess": "2026-11-13T17:24:04.525Z",
-      "fetched": 167
+      "fetched": 218
     },
     {
       "sourceId": "vaste-plekken",
       "sourceName": "Vaste plekken",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-18T10:13:08.503Z",
-      "lastSuccess": "2026-11-18T10:13:08.503Z",
+      "lastAttempt": "2026-11-19T10:23:58.360Z",
+      "lastSuccess": "2026-11-19T10:23:58.360Z",
       "firstSuccess": "2026-11-05T18:32:57.356Z",
       "fetched": 9,
       "notes": "9 vaste plekken"
     }
   ],
   "totals": {
-    "active": 1471,
-    "added": 36,
-    "updated": 31,
+    "active": 1472,
+    "added": 64,
+    "updated": 38,
     "cancelled": 0,
-    "expired": 22,
-    "merged": 85
+    "expired": 23,
+    "merged": 125
   }
 }
